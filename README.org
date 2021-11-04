@@ -1,0 +1,6 @@
+#+TITLE: Identity Based Encryption Scheme
+#+AUTHOR: Anders B. Ladefoged
+
+Identity-Based Encryption scheme based on Weil Pairs as presented in Dan Boneh and Matthew K. Franklins paper [[https://crypto.stanford.edu/~dabo/papers/bfibe.pdf][Identity-Based Encryption from the Weil Pairing]] from 2001. The scheme is implemented in Python utilising the [[https://github.com/elliptic-shiho/ecpy][ecpy]] library.
+
+
