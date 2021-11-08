@@ -1,6 +1,37 @@
 #+TITLE: Identity Based Encryption Scheme
 #+AUTHOR: Anders B. Ladefoged
 
-Identity-Based Encryption scheme based on Weil Pairs as presented in Dan Boneh and Matthew K. Franklins paper [[https://crypto.stanford.edu/~dabo/papers/bfibe.pdf][Identity-Based Encryption from the Weil Pairing]] from 2001. The scheme is implemented in Python utilising the [[https://github.com/elliptic-shiho/ecpy][ecpy]] library.
+Identity-Based Encryption scheme based on Weil Pairs as presented in Dan Boneh and Matthew K. Franklins paper [[https://crypto.stanford.edu/~dabo/papers/bfibe.pdf][Identity-Based Encryption from the Weil Pairing]] from 2001. The scheme is implemented in Python utilising the [[https://github.com/JHUISI/charm][charm]] framework.
 
+* Setup
+The charm framework only works on python versions <=3.7. Install an older version, /e.g./ [[https://www.python.org/downloads/release/python-3712/][Python 3.7.12]].
+Next, create a virtual environment using your favourite environment manager. For example
+#+begin_src
+python -m virtualenvironment -p <path/to/python37/binaries> <name_of_venv>
+#+end_src
+Pull the [[https://github.com/JHUISI/charm][charm dev branch]] and apply [[https://github.com/dfaranha][Diego F. Aranha's]] fix seen in [[https://github.com/JHUISI/charm/issues/255][charm: Issue 255]]:
+Replace the following snippet from /charm/core/benchmark/benchmarkmodule.h/:
+#+begin_src C -n 57
+// define new benchmark type for benchmark module
+PyTypeObject BenchmarkType;
+// define new benchmark error type (will be used for notifying errors)
+PyObject *BenchmarkError;
+#+end_src
+with 
+#+begin_src C -n 57
+#ifndef BENCHMARK_MODULE
+// define new benchmark type for benchmark module
+extern PyTypeObject BenchmarkType;
+// define new benchmark error type (will be used for notifying errors)
+extern PyObject *BenchmarkError;
+#else
+// define new benchmark type for benchmark module
+PyTypeObject BenchmarkType;
+// define new benchmark error type (will be used for notifying errors)
+PyObject *BenchmarkError;
+#endif
+#+end_src
+Continue following the [[https://jhuisi.github.io/charm/install_source.html][charm installation]] by running /./configure.sh/, /make/, /make install/, /make test/ after installing the required dependencies.
+
+* System
 
