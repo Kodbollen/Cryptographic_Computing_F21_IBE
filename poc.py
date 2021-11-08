@@ -14,7 +14,7 @@ class PKG:
         # Setup step 1:
         # Run \mathcal{G} on input k to generate a prime q, two groups G1, G2 of order q
         #   and admissable map G1xG1->G2:
-        # // k=512 is default in Pairinggroup - should be changed to 100 post 'exTNF'.
+        # // k=512 is default in Pairinggroup - should be changed to 100 post 'exTNF'?
         # self.group = PairingGroup('MNT224', secparam=security_parameter)
         self.group = PairingGroup('SS1024', secparam=security_parameter)
         # Charm library of hashToZr, hashToZn functions
@@ -74,7 +74,7 @@ def main():
     t_ID = 'anders@bladefoged.com'
     pkg = PKG(512)
 
-    # Alice encrypts to Balladefoged
+    # Alice encrypts to Bollen
     M = b'pls see my message'
     C = pkg.encrypt(M, t_ID)
     print('Ciphertext:\n{}\n'.format(C))

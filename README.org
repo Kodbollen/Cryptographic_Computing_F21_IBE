@@ -7,8 +7,9 @@ Identity-Based Encryption scheme based on Weil Pairs as presented in Dan Boneh a
 The charm framework only works on python versions <=3.7. Install an older version, /e.g./ [[https://www.python.org/downloads/release/python-3712/][Python 3.7.12]].
 Next, create a virtual environment using your favourite environment manager. For example
 #+begin_src
-python -m virtualenvironment -p <path/to/python37/binaries> <name_of_venv>
+python -m virtualenv -p <path/to/python37/binaries> <name_of_venv>
 #+end_src
+As of now (08-11-2021) the charm framework fails to build.
 Pull the [[https://github.com/JHUISI/charm][charm dev branch]] and apply [[https://github.com/dfaranha][Diego F. Aranha's]] fix seen in [[https://github.com/JHUISI/charm/issues/255][charm: Issue 255]]:
 Replace the following snippet from /charm/core/benchmark/benchmarkmodule.h/:
 #+begin_src C -n 57
