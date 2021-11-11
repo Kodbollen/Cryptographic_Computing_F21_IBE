@@ -1,13 +1,6 @@
-from charm.toolbox.pairinggroup import PairingGroup, ZR, G1, G2, pair
+from charm.toolbox.pairinggroup import PairingGroup, ZR, G1, pair
 from charm.core.math.integer import randomBits, integer, bitsize
 from charm.toolbox.hash_module import Hash, int2Bytes, integer
-
-
-'''
-Design idea:
-Classes: PKG, Party
-All parties are instantiated with the same PKG instance.
-'''
 
 class PKG:
     def __init__(self, security_parameter=512):
@@ -70,21 +63,37 @@ class PKG:
         else:
             return None
 
+class Party:
+    def __init__(self, id, pkg):
+        self.id = id
+        self.pkg = pkg
+        self.d_ID = None
+
+    def authenticate_with_pkg(self):
+        self.d_ID = self.pkg.extract(self.id)
+
+    def receive_message(self, cipher):
+        return self.pkg.decrypt(cipher, self.d_ID)
+
+    def send_message(self, message, recipient_id):
+        return self.pkg.encrypt(message, recipient_id)
+
 def main():
-    t_ID = 'anders@bladefoged.com'
     pkg = PKG(512)
+    Alice = Party('alice@au.dk', pkg)
+    Bob = Party('bob@au.dk', pkg)
 
-    # Alice encrypts to Bollen
-    M = b'pls see my message'
-    C = pkg.encrypt(M, t_ID)
-    print('Ciphertext:\n{}\n'.format(C))
+    # Retrieve Private keys (d_ID) from PKG
+    Alice.authenticate_with_pkg()
+    Bob.authenticate_with_pkg()
 
-    # Bollen decrypts
-    d_ID = pkg.extract(t_ID)
-
-    M = pkg.decrypt(C, d_ID)
-    if M:
-        print('Successful decryption!\nMessage:\n{}\n'.format(M))
+    # Alice encrypts to Bob
+    cipher = Alice.send_message(b'Hello, Bob!', 'bob@au.dk')
+    print('Alice sends cipher:\n{}\n'.format(cipher))
+    message = Bob.receive_message(cipher)
+    
+    if message:
+        print('Bob decrypts message:\n{}\n'.format(message))
     else:
         print('Unsuccesful decryption :(')
 
