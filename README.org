@@ -32,7 +32,7 @@ PyTypeObject BenchmarkType;
 PyObject *BenchmarkError;
 #endif
 #+end_src
-Continue following the [[https://jhuisi.github.io/charm/install_source.html][charm installation]] by running /./configure.sh/, /make/, /make install/, /make test/ after installing the required dependencies.
+Continue following the [[https://jhuisi.github.io/charm/install_source.html][charm installation]] by installing dependencies, [[https://crypto.stanford.edu/pbc/news.html][PBC]],[[https://gmplib.org/][GMP]],[[https://www.openssl.org/][OpenSSL]] and running /./configure.sh/, /make/, /make install/, /make test/ after installing the required dependencies.
 
 * System
 
