@@ -7,7 +7,6 @@ class PKG:
         # Setup step 1:
         # Run \mathcal{G} on input k to generate a prime q, two groups G1, G2 of order q
         #   and admissable map G1xG1->G2:
-        # // k=512 is default in Pairinggroup - should be changed to 100 post 'exTNF'?
         self.group = PairingGroup('SS1024', secparam=security_parameter)
         # Charm library of hashToZr, hashToZn functions
         self.hashings = Hash(self.group) 

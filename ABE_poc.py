@@ -101,9 +101,9 @@ class Party:
 
 def main():
     all_attributes = ['student', 'teacher', 'crypto_lover', 'ready_for_christmas', 'ready_for_exam']
-    pkg = PKG(all_attributes, 3) # We only require 2 attributes
+    pkg = PKG(all_attributes, 3) # We only require 3 attributes
     Alice = Party(all_attributes[1:], pkg)
-    Bob = Party([all_attributes[0]] + all_attributes[2:4], pkg) # Bob is not a teacher nor ready for exam.
+    Bob = Party([all_attributes[0]] + all_attributes[2:4], pkg) # Bob is not a teacher nor ready for exam :(
 
     # Retrieve Private keys (d_ID) from PKG
     Bob.authenticate_with_pkg()
